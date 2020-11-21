@@ -1,17 +1,31 @@
-import logo from './logo.svg';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import './App.css';
 
-function App() {
-
+class App extends Component {
+render() {
+  const { user, page } = this.props
   return (
     <div className="App">
       <header className="App-header">
         <h1 className="App-title">Мой топ фото</h1>
       </header>
       <p className="App-intro">Здесь будут мои самые залайканые фото</p>
+      {/* <p>Меня зовут: {this.props.user}</p> */}
+      <p>Привет {user.name} ! </p>
+  <p> У тебя {page.photos.length} фото за {page.year} год</p>
     </div>
   );
- 
+  }
 }
 
-export default App;
+const mapStateToProps = store =>{
+  console.log(store)
+  return{
+    user: store.user,
+    page: store.page,
+  }
+}
+
+
+export default connect(mapStateToProps)(App)
